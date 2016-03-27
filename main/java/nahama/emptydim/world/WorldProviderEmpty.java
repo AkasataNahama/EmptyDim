@@ -25,45 +25,45 @@ public class WorldProviderEmpty extends WorldProvider {
 		return new ChunkProviderEmpty(worldObj);
 	}
 
-	/** このディメンションにリスポーンできるか。
+	/** リスポーンできるか。
 	 * @return false */
 	@Override
 	public boolean canRespawnHere() {
 		return false;
 	}
 
-	/** このディメンションが通常世界か。
+	/** 通常世界か。
 	 * @return false */
 	@Override
 	public boolean isSurfaceWorld() {
 		return false;
 	}
 
-	/** このディメンションのデータを保存するフォルダの名前を返す。 */
+	/** データを保存するフォルダの名前を返す。 */
 	@Override
 	public String getSaveFolder() {
 		return "EmptyDimension";
 	}
 
-	/** このディメンションの名前を返す。 */
+	/** 名前を返す。 */
 	@Override
 	public String getDimensionName() {
 		return "Empty Dimension";
 	}
 
-	/** このディメンションにワープしてきたときのメッセージを返す。 */
+	/** 入ってきたときのメッセージを返す。 */
 	@Override
 	public String getWelcomeMessage() {
 		return "Entering the Empty Dimension";
 	}
 
-	/** このディメンションからワープしたときのメッセージを返す。 */
+	/** 出て行ったときのメッセージを返す。 */
 	@Override
 	public String getDepartMessage() {
 		return "Leaving the Empty Dimension";
 	}
 
-	/** このディメンションの空の色を返す。 */
+	/** 霧の色を返す。 */
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Vec3 getFogColor(float par1, float par2) {
@@ -85,12 +85,27 @@ public class WorldProviderEmpty extends WorldProvider {
 		return null;
 	}
 
-	/** 空に色が付いているかを返す。(?)
+	/** 空に色が付いているかを返す。
 	 * @return false */
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean isSkyColored() {
 		return false;
+	}
+
+	/** 岩盤のパーティクルを表示するか。
+	 * @return false */
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean getWorldHasVoidParticles() {
+		return false;
+	}
+
+	/** 岩盤の霧の濃さを返す。
+	 * @return 1.0D */
+	@Override
+	public double getVoidFogYFactor() {
+		return 1.0D;
 	}
 
 }

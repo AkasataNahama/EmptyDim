@@ -30,6 +30,7 @@ public class TeleporterEmpty extends Teleporter {
 			toID = 0;
 		EntityPlayerMP playerMP = (EntityPlayerMP) player;
 		playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, toID, new TeleporterEmpty(playerMP.mcServer.worldServerForDimension(toID)));
+		playerMP.addExperienceLevel(0);
 	}
 
 	public TeleporterEmpty(WorldServer world) {
