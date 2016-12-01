@@ -1,10 +1,5 @@
 package nahama.emptydim.world.biome;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
 import nahama.emptydim.core.EmptyDimBiomeCore;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
@@ -15,10 +10,14 @@ import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
-public class WorldChunkManagerEmpty extends WorldChunkManager {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
+public class WorldChunkManagerEmpty extends WorldChunkManager {
 	/** 生成が許可されているバイオームのリスト。 */
-	public static ArrayList<BiomeGenEmpty> allowedBiomes = new ArrayList<BiomeGenEmpty>(Arrays.asList(EmptyDimBiomeCore.biomeEmpty));
+	public static ArrayList<BiomeGenEmpty> allowedBiomes = new ArrayList<BiomeGenEmpty>(Collections.singletonList(EmptyDimBiomeCore.biomeEmpty));
 	private BiomeCache biomeCache;
 	private List biomesToSpawnIn;
 
@@ -138,5 +137,4 @@ public class WorldChunkManagerEmpty extends WorldChunkManager {
 	public GenLayer[] getModdedBiomeGenerators(WorldType worldType, long seed, GenLayer[] original) {
 		return original;
 	}
-
 }

@@ -1,12 +1,10 @@
 package nahama.emptydim.util;
 
+import nahama.emptydim.EmptyDimCore;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import nahama.emptydim.EmptyDimCore;
-
-public class Util {
-
+public class EmptyDimLog {
 	private static Logger logger = LogManager.getLogger(EmptyDimCore.MODID);
 
 	public static void info(String msg) {
@@ -14,12 +12,12 @@ public class Util {
 	}
 
 	public static void info(String msg, String data) {
-		Util.info(msg + " [" + data + "]");
+		EmptyDimLog.info(msg + " [" + data + "]");
 	}
 
 	public static void info(String msg, String data, boolean flag) {
 		if (flag)
-			Util.info(msg + " [" + data + "]");
+			EmptyDimLog.info(msg, data);
 	}
 
 	public static void error(String msg) {
@@ -27,12 +25,11 @@ public class Util {
 	}
 
 	public static void error(String msg, String data) {
-		Util.error(msg + " [" + data + "]");
+		EmptyDimLog.error(msg + " [" + data + "]");
 	}
 
 	public static void error(String msg, String data, boolean flag) {
 		if (flag)
-			Util.error(msg + " [" + data + "]");
+			EmptyDimLog.error(msg, data);
 	}
-
 }

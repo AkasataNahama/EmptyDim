@@ -2,36 +2,50 @@ package nahama.emptydim.core;
 
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import nahama.emptydim.EmptyDimCore;
-import nahama.emptydim.util.Util;
+import nahama.emptydim.util.EmptyDimLog;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.config.Configuration;
 
 public class EmptyDimConfigCore {
-
+	public static Configuration cfg;
+	public static boolean canTeleportFromEnd = true;
+	// カテゴリー
 	private static final String GENERAL = "General";
+	public static final String CHANGEABLE = GENERAL + ".Changeable";
 
-	/** Configを読み込む処理。 */
+	/** Configを読み込む。 */
 	public static void loadConfig(FMLPreInitializationEvent event) {
-		Configuration cfg = new Configuration(event.getSuggestedConfigurationFile(), true);
+		cfg = new Configuration(event.getSuggestedConfigurationFile(), true);
+		cfg.load();
+		syncConfig();
 		try {
-			cfg.load();
-			EmptyDimCore.idDimension = cfg.getInt("dimensionID", GENERAL, 4, 0, Integer.MAX_VALUE, "ID of Empty Dimension");
-			EmptyDimCore.idBiome = cfg.getInt("biomeID", GENERAL, 64, 0, 255, "ID of Empty Biome");
+			EmptyDimCore.idDimension = (byte) cfg.getInt("dimensionID", GENERAL, 4, 2, 127, "ID of Empty Dimension");
+			EmptyDimCore.idBiome = (short) cfg.getInt("biomeID", GENERAL, 64, 40, 255, "ID of Empty Biome");
 		} catch (Exception e) {
-			Util.error("Error on loading config.", "StarWoodsConfigCore");
+			EmptyDimLog.error("Error on loading config.", "EmptyDimConfigCore");
 		} finally {
 			cfg.save();
 		}
-
 		if (DimensionManager.isDimensionRegistered(EmptyDimCore.idDimension)) {
-			Util.error("Dimension ID you selected is already used! Please select other number. selected:" + EmptyDimCore.idDimension, "StarWoodsConfigCore");
+			EmptyDimLog.error("Dimension ID you selected is already used. Please select other number. selected:" + EmptyDimCore.idDimension, "EmptyDimConfigCore");
 			throw new RuntimeException("Invalid Dimension ID (by Empty Dim.)");
 		}
 		if (BiomeGenBase.getBiomeGenArray()[EmptyDimCore.idBiome] != null) {
-			Util.error("Biome ID you selected is already used! Please select other number. selected:" + EmptyDimCore.idBiome, "StarWoodsConfigCore");
+			EmptyDimLog.error("Biome ID you selected is already used. Please select other number. selected:" + EmptyDimCore.idBiome, "EmptyDimConfigCore");
 			throw new RuntimeException("Invalid Biome ID (by Empty Dim.)");
 		}
 	}
 
+	/** Configを同期する。 */
+	public static void syncConfig() {
+		String separator = System.lineSeparator();
+		try {
+			canTeleportFromEnd = cfg.getBoolean("canTeleportFromEnd", CHANGEABLE, canTeleportFromEnd, "When true, you can teleport to Empty Dimension from The End." + separator + "This function is dangerous especially when some other mod is loaded.");
+		} catch (Exception e) {
+			EmptyDimLog.error("Error on loading config.", "EmptyDimConfigCore");
+		} finally {
+			cfg.save();
+		}
+	}
 }

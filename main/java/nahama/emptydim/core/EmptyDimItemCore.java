@@ -5,15 +5,11 @@ import nahama.emptydim.item.ItemEmptyPortal;
 import net.minecraft.item.Item;
 
 public class EmptyDimItemCore {
-
 	public static Item canePortal;
 
-	/** アイテムを登録する処理。 */
+	/** アイテムを登録する。 */
 	public static void registerItem() {
-		canePortal = new ItemEmptyPortal()
-				.setUnlocalizedName("emptydim.cane_of_portal")
-				.setTextureName("emptydim:cane_of_portal");
+		canePortal = new ItemEmptyPortal().setUnlocalizedName("emptydim.canePortal").setTextureName("emptydim:cane_of_portal");
 		GameRegistry.registerItem(canePortal, "cane_of_portal");
 	}
-
 }

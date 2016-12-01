@@ -1,5 +1,5 @@
 
-tile.emptydim.protal.0.name=ポータル
-tile.emptydim.protal.1.name=岩盤ポータル
+tile.emptydim.portal.0.name=ポータル
+tile.emptydim.portal.1.name=岩盤ポータル
 
-item.emptydim.cane_of_portal.name=ポータルの杖
+item.emptydim.canePortal.name=ポータルの杖

@@ -4,13 +4,11 @@ import nahama.emptydim.EmptyDimCore;
 import nahama.emptydim.world.biome.BiomeGenEmpty;
 
 public class EmptyDimBiomeCore {
-
 	public static BiomeGenEmpty biomeEmpty;
 
-	/** バイオームを登録する処理。 */
+	/** バイオームを登録する。 */
 	public static void registerBiome() {
 		biomeEmpty = new BiomeGenEmpty(EmptyDimCore.idBiome);
-		biomeEmpty.setBiomeName("biomeEmpty");
+		biomeEmpty.setBiomeName("Empty Biome");
 	}
-
 }
